@@ -1,0 +1,23 @@
+[project]
+name = "sam-infer"
+version = "0.1.0"
+description = "Interactive SAM segmentation server for the Anno annotation platform"
+requires-python = ">=3.11"
+dependencies = [
+    "anno-sdk[server]",
+    "torch>=2.2",
+    "transformers>=4.44",
+    "pillow>=10.0",
+    "numpy>=2.0.0,<2.3", # match anno-sdk's pin to avoid a resolver conflict
+]
+
+[tool.uv.sources]
+anno-sdk = { path = "anno-sdk", editable = true }
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+# Single-module project: ship server.py as the importable module.
+include = ["server.py"]

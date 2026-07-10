@@ -1,0 +1,22 @@
+FROM pytorch/pytorch:2.5.1-cuda12.4-cudnn9-runtime
+
+RUN pip install --no-cache-dir uv
+
+WORKDIR /app
+
+ENV PYTHONUNBUFFERED=1 \
+    HF_HOME=/app/.cache/huggingface \
+    TRANSFORMERS_CACHE=/app/.cache/huggingface \
+    NUMBA_CACHE_DIR=/tmp \
+    UV_LINK_MODE=copy
+
+COPY anno-sdk/pyproject.toml anno-sdk/uv.lock anno-sdk/
+COPY anno-sdk/src/ anno-sdk/src/
+COPY pyproject.toml .
+COPY server.py .
+
+RUN uv sync --no-dev
+
+EXPOSE 8422
+
+ENTRYPOINT ["uv", "run", "python", "server.py"]

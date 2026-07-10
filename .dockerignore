@@ -1,0 +1,15 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+.venv/
+.vscode/
+*.md
+.git/
+.gitignore
+anno-sdk/tests/
+anno-sdk/CLAUDE.md
+anno-sdk/README.md
+.idea/
+docker-compose.yml

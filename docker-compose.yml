@@ -1,0 +1,32 @@
+services:
+  sam-infer:
+    build: .
+    image: sam-infer:latest
+    container_name: sam-infer
+    ports:
+      - "${SERVER_PORT:-8422}:8422"
+    environment:
+      - LOG_LEVEL=${LOG_LEVEL:-INFO}
+      - SAM_MODEL_ID=${SAM_MODEL_ID:-facebook/sam-vit-base}
+      - SERVER_HOST=0.0.0.0
+      - SERVER_PORT=8422
+      - PROVIDER_API_KEY=${PROVIDER_API_KEY:-changeme}
+      - PUBLIC_URL=${PUBLIC_URL:-}
+      - CORS_ORIGIN=${CORS_ORIGIN:-}
+      - DEVICE=${DEVICE:-}
+      - AUTH_HEADER=${AUTH_HEADER:-X-API-Key}
+      - TOKEN_TTL_SECONDS=${TOKEN_TTL_SECONDS:-3600}
+      - TOKEN_HEADER=${TOKEN_HEADER:-X-Session-Token}
+    volumes:
+      - model_cache:/app/.cache/huggingface
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    restart: unless-stopped
+
+volumes:
+  model_cache:
