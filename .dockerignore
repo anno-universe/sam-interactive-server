@@ -8,8 +8,5 @@ build/
 *.md
 .git/
 .gitignore
-anno-sdk/tests/
-anno-sdk/CLAUDE.md
 .idea/
 docker-compose.yml
-!anno-sdk/README.md
