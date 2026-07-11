@@ -12,10 +12,10 @@ ENV PYTHONUNBUFFERED=1 \
 
 COPY anno-sdk/pyproject.toml anno-sdk/uv.lock anno-sdk/
 COPY anno-sdk/src/ anno-sdk/src/
-COPY pyproject.toml .
+COPY pyproject.toml uv.lock .
 COPY server.py .
 
-RUN uv sync --no-dev
+RUN uv sync --no-dev --frozen
 
 EXPOSE 8422
 
