@@ -10,7 +10,7 @@ ENV PYTHONUNBUFFERED=1 \
     NUMBA_CACHE_DIR=/tmp \
     UV_LINK_MODE=copy
 
-COPY anno-sdk/pyproject.toml anno-sdk/uv.lock anno-sdk/
+COPY anno-sdk/pyproject.toml anno-sdk/uv.lock anno-sdk/README.md anno-sdk/
 COPY anno-sdk/src/ anno-sdk/src/
 COPY pyproject.toml uv.lock .
 COPY server.py .

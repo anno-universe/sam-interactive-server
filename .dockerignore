@@ -10,6 +10,6 @@ build/
 .gitignore
 anno-sdk/tests/
 anno-sdk/CLAUDE.md
-anno-sdk/README.md
 .idea/
 docker-compose.yml
+!anno-sdk/README.md
