@@ -1,7 +1,7 @@
 services:
   sam-infer:
     build: .
-    image: sam-infer:latest
+    image: ghcr.io/anno-universe/sam-interactive-server:latest
     container_name: sam-infer
     ports:
       - "${SERVER_PORT:-8422}:8422"
