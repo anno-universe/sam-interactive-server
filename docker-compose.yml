@@ -18,7 +18,9 @@ services:
       - TOKEN_TTL_SECONDS=${TOKEN_TTL_SECONDS:-3600}
       - TOKEN_HEADER=${TOKEN_HEADER:-X-Session-Token}
     volumes:
-      - model_cache:/app/.cache/huggingface
+      # HF 下载的权重落到宿主机目录（把 HF_CACHE_DIR 指向 JuiceFS 挂载点即可外部存储）。
+      # 例如：HF_CACHE_DIR=/mnt/juicefs/sam-infer/hf-cache
+      - ${HF_CACHE_DIR:-./hf-cache}:/app/.cache/huggingface
     deploy:
       resources:
         reservations:
@@ -27,6 +29,3 @@ services:
               count: 1
               capabilities: [gpu]
     restart: unless-stopped
-
-volumes:
-  model_cache:
