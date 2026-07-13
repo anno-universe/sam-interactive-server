@@ -5,7 +5,10 @@ description = "Interactive SAM segmentation server for the Anno annotation platf
 requires-python = ">=3.11"
 dependencies = [
     "anno-sdk[server]",
-    "torch>=2.2",
+    # Pinned to a CUDA 12.4 build (see [tool.uv.index] below) so the wheel runs on
+    # older NVIDIA drivers. Newer default-PyPI torch wheels are built against CUDA
+    # 12.6/12.8 and fail on hosts whose driver only supports CUDA 12.4/12.5.
+    "torch>=2.2,<2.7",
     "transformers>=4.44",
     "pillow>=10.0",
     "numpy>=2.0.0,<2.3", # match anno-sdk's pin to avoid a resolver conflict
@@ -13,6 +16,13 @@ dependencies = [
 
 [tool.uv.sources]
 anno-sdk = { git = "https://github.com/anno-universe/anno-sdk.git" }
+# Install torch from PyTorch's CUDA 12.4 wheel index for broad driver compatibility.
+torch = { index = "pytorch-cu124" }
+
+[[tool.uv.index]]
+name = "pytorch-cu124"
+url = "https://download.pytorch.org/whl/cu124"
+explicit = true
 
 [build-system]
 requires = ["hatchling"]
