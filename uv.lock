@@ -8,8 +8,8 @@ resolution-markers = [
 
 [[package]]
 name = "anno-sdk"
-version = "0.4.0"
-source = { git = "https://github.com/anno-universe/anno-sdk.git#0094ed5dae72fc3f273c4c9af3abd2e6f118b988" }
+version = "0.5.0"
+source = { git = "https://github.com/anno-universe/anno-sdk.git#05abc7c3afa08ba44edfd2584e2208195855217a" }
 dependencies = [
     { name = "httpx" },
     { name = "numpy" },
